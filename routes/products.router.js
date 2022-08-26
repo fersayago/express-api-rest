@@ -25,17 +25,24 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
   const { id } = req.params;
-  res.json({
-    id,
-    name: 'Producto 1',
-    price: 100,
-    description: 'Descripcion del producto 1'
-  });
+  if (id === "404"){
+    res.status(404).json({
+      message: "error, no se pudo encontrar el id 404",
+      id
+    })
+  } else {
+    res.status(200).json({
+      id,
+      name: 'Producto 1',
+      price: 100,
+      description: 'Descripcion del producto 1'
+    });
+  }
 })
 
 router.post('/', (req, res) => {
   const body = req.body;
-  res.json({
+  res.status(201).json({
     message: 'created',
     data: body
   })
