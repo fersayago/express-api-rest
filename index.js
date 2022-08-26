@@ -5,6 +5,9 @@ const app = express();
 
 const port = 3005;
 
+// Middleware
+app.use(express.json());
+
 app.get('/', (req, res) => {
   res.send('Hola mi server en express');
 })
