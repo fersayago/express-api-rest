@@ -13,10 +13,14 @@ router.get('/', (req, res) => {
   res.json(products);
 })
 
-router.get('/:id', (req, res) => {
-  const { id } = req.params;
-  const product = service.findOne(id);
-  res.json(product);
+router.get('/:id', (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const product = service.findOne(id);
+    res.json(product);
+  } catch (error) {
+    next(error);
+  }
 })
 
 router.post('/', (req, res) => {
