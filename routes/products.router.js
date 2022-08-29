@@ -33,15 +33,15 @@ router.post('/', (req, res) => {
 })
 
 // hace un update de solamente los campos que se le pasan en el body
-router.patch('/:id', (req, res) => {
-  const id = req.params.id;
-  const body = req.body;
-  const product = service.update(id, body);
-  res.json({
-    message: 'partial update',
-    data: product,
-    id,
-  })
+router.patch('/:id', (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const body = req.body;
+    const product = service.update(id, body);
+    res.json(product);
+  } catch (err) {
+    next(err)
+  }
 })
 
 router.delete('/:id', (req, res) => {
