@@ -45,11 +45,10 @@ class ProductsService{
     if (!product){
       throw boom.notFound('product not found');
     }
-    else if (product.isBlocked){
+    if (product.isBlocked){
       throw boom.conflict('product is blocked');
-    }else {
-      return product;
     }
+    return product;
   }
 
   update(id, changes){
