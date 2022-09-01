@@ -6,7 +6,7 @@ const { boomErrorHandler, logErrors, errorHandler } = require('./middlewares/err
 
 const app = express();
 
-const port = 3005;
+const port = process.env.PORT || 3005;
 
 // Middleware
 app.use(express.json());
@@ -16,7 +16,7 @@ app.use(express.json());
 const whitelist = ['http://localhost:3000', 'https://fersayago.github.io'];
 const options = {
   origin: (origin, callback) => {
-    if (whitelist.includes(origin)){ // si el origen esta en la whitelist
+    if (whitelist.includes(origin) || !origin){ // si el origen esta en la whitelist
       callback(null, true); // no hay error y el acceso esta permitido
     } else {
       callback(new Error('no permitido'));
