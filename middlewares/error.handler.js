@@ -14,7 +14,8 @@ function boomErrorHandler(err, req, res, next){
   // revisa que el error sea de tipo boom
   if (err.isBoom){
     const { output } = err;
-    res.status(output.statusCode).json(output.payload);
+    // se agrega un return para que corte la ejecución de los middlewares
+    return res.status(output.statusCode).json(output.payload);
   }
   next(err);
 }
